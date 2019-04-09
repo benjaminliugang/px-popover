@@ -27,11 +27,17 @@ $popover-border-color: var(--px-popover-border-color, black);
 $popover-text-color: var(--px-popover-text-color, black);
 $popover-shadow-color: var(--px-popover-shadow-color, black);
 $popover-max-width: var(--px-popover-max-width, 300px);
+$popover-padding: var(--px-popover-padding, 20px);
+$popover-z-index: var(--px-popover-z-index, 103);
 $carat-size: 7.5px;
+
+#dropdown {
+  z-index: $popover-z-index;
+}
 
 #popover {
   outline: none;
-  padding: 20px;
+  padding: $popover-padding;
   max-width: $popover-max-width;
   border: 1px solid $popover-border-color;
   background: $popover-background-color;
@@ -47,94 +53,94 @@ $carat-size: 7.5px;
 }
 //carat on the left
 #popover.right:after, #popover.right:before {
-	right: calc(100% - 1px);
-	top: 50%;
-	border: solid transparent;
-	content: " ";
-	height: 0;
-	width: 0;
-	position: absolute;
+  right: calc(100% - 1px);
+  top: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
 }
 #popover.right:after {
-	border-color: rgba(136, 183, 213, 0);
-	border-right-color: $popover-background-color;
-	border-width: $carat-size;
-	margin-top: -$carat-size;
+  border-color: rgba(136, 183, 213, 0);
+  border-right-color: $popover-background-color;
+  border-width: $carat-size;
+  margin-top: -$carat-size;
 }
 #popover.right:before {
-	border-color: rgba(194, 225, 245, 0);
-	border-right-color: $popover-border-color;
-	border-width: $carat-size + 1px;
-	margin-top: -$carat-size - 1px;
+  border-color: rgba(194, 225, 245, 0);
+  border-right-color: $popover-border-color;
+  border-width: $carat-size + 1px;
+  margin-top: -$carat-size - 1px;
 }
 
 //carat on the right
 #popover.left:after, #popover.left:before {
-	left: calc(100% - 1px);
-	top: 50%;
-	border: solid transparent;
-	content: " ";
-	height: 0;
-	width: 0;
-	position: absolute;
+  left: calc(100% - 1px);
+  top: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
 }
 #popover.left:after {
-	border-color: rgba(136, 183, 213, 0);
-	border-left-color: $popover-background-color;
-	border-width: $carat-size;
-	margin-top: -$carat-size;
+  border-color: rgba(136, 183, 213, 0);
+  border-left-color: $popover-background-color;
+  border-width: $carat-size;
+  margin-top: -$carat-size;
 }
 #popover.left:before {
-	border-color: rgba(194, 225, 245, 0);
-	border-left-color: $popover-border-color;
-	border-width: $carat-size + 1px;
-	margin-top: -$carat-size - 1px;
+  border-color: rgba(194, 225, 245, 0);
+  border-left-color: $popover-border-color;
+  border-width: $carat-size + 1px;
+  margin-top: -$carat-size - 1px;
 }
 
 //carat on top
 #popover.bottom:after, #popover.bottom:before {
-	left: 50%;
-	bottom: calc(100% - 1px);
-	border: solid transparent;
-	content: " ";
-	height: 0;
-	width: 0;
-	position: absolute;
+  left: 50%;
+  bottom: calc(100% - 1px);
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
 }
 #popover.bottom:after {
-	border-color: rgba(136, 183, 213, 0);
-	border-bottom-color: $popover-background-color;
-	border-width: $carat-size;
-	margin-left: -$carat-size;
+  border-color: rgba(136, 183, 213, 0);
+  border-bottom-color: $popover-background-color;
+  border-width: $carat-size;
+  margin-left: -$carat-size;
 }
 #popover.bottom:before {
-	border-color: rgba(194, 225, 245, 0);
-	border-bottom-color: $popover-border-color;
-	border-width: $carat-size + 1px;
-	margin-left: -$carat-size - 1px;
+  border-color: rgba(194, 225, 245, 0);
+  border-bottom-color: $popover-border-color;
+  border-width: $carat-size + 1px;
+  margin-left: -$carat-size - 1px;
 }
 
 //carat on bottom
 #popover.top:after, #popover.top:before {
-	left: 50%;
-	top: calc(100% - 1px);
-	border: solid transparent;
-	content: " ";
-	height: 0;
-	width: 0;
-	position: absolute;
+  left: 50%;
+  top: calc(100% - 1px);
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
 }
 #popover.top:after {
-	border-color: rgba(136, 183, 213, 0);
-	border-top-color: $popover-background-color;
-	border-width: $carat-size;
-	margin-left: -$carat-size;
+  border-color: rgba(136, 183, 213, 0);
+  border-top-color: $popover-background-color;
+  border-width: $carat-size;
+  margin-left: -$carat-size;
 }
 #popover.top:before {
-	border-color: rgba(194, 225, 245, 0);
-	border-top-color: $popover-border-color;
-	border-width: $carat-size + 1px;
-	margin-left: -$carat-size - 1px;
+  border-color: rgba(194, 225, 245, 0);
+  border-top-color: $popover-border-color;
+  border-width: $carat-size + 1px;
+  margin-left: -$carat-size - 1px;
 }
 
 // Trumps
