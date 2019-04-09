@@ -1,3 +1,9 @@
+v2.3.0
+==================
+* Added the following CSS variables:
+  * `--px-popover-padding` - Padding around content within popover
+  * `--px-popover-z-index` - Configurable z-index to position popover within your app
+
 v2.2.4
 ==================
 * Added missing null check in setPosition function
