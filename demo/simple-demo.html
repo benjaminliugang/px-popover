@@ -19,27 +19,51 @@ limitations under the License.
 
 <head>
   <title>px-popover simple demo</title>
-  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-  <link rel="import" href="../../polymer/polymer.html" />
-  <link rel="import" href="../px-popover.html" />
+  <script src="../../@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+  <script type="module" src="../../@polymer/polymer/polymer-legacy.js"></script>
+  <script type="module" src="../px-popover.js"></script>
 
-  <link rel="import" href="../../px-theme/px-theme-styles.html">
+  <script type="module" src="../../px-theme/px-theme-styles.js"></script>
 
 </head>
 
 <body>
-  <custom-style>
-    <style include="px-theme-styles" is="custom-style"></style>
-  </custom-style>
+  <!-- FIXME(polymer-modulizer):
+        These imperative modules that innerHTML your HTML are
+        a hacky way to be sure that any mixins in included style
+        modules are ready before any elements that reference them are
+        instantiated, otherwise the CSS @apply mixin polyfill won't be
+        able to expand the underlying CSS custom properties.
+        See: https://github.com/Polymer/polymer-modulizer/issues/154
+        -->
+    <script type="module">
+const $_documentContainer = document.createElement('template');
 
-  <button style="margin:100px;" class="btn btn--tertiary" id="popover1" type="button" name="button">Click here</button>
-  <px-popover for="popover1" popover-title="Title" popover-body="This is a popover with content." >
+$_documentContainer.innerHTML = `<custom-style>
+    <style include="px-theme-styles" is="custom-style"></style>
+  </custom-style>`;
+
+document.body.appendChild($_documentContainer.content);
+</script>
+
+  <script type="module">
+const $_documentContainer = document.createElement('template');
+$_documentContainer.innerHTML = `<button style="margin:100px;" class="btn btn--tertiary" id="popover1" type="button" name="button">Click here</button>`;
+document.body.appendChild($_documentContainer.content);
+</script>
+  <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<px-popover for="popover1" popover-title="Title" popover-body="This is a popover with content.">
     <!-- <div>This is a form
       <form>
         <input class="text-input" type="text" value="Input">
       </form>
     </div> -->
-  </px-popover>
+  </px-popover>`;
+
+document.body.appendChild($_documentContainer.content);
+</script>
 
 </body>
 
