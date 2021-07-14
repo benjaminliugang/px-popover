@@ -1,3 +1,7 @@
+v2.3.1
+==================
+* Align carat's position when show with scroll bar
+
 v2.3.0
 ==================
 * Added the following CSS variables:
