@@ -61,7 +61,11 @@ Custom property | Description
 -->
 <dom-module id="px-popover">
     <template>
-      <style include="px-popover-styles"></style>
+      <style include="px-popover-styles">
+        :host {
+          --carat-top: 50%;
+        }
+      </style>
 
       <iron-dropdown
         id="dropdown"
@@ -250,6 +254,27 @@ Custom property | Description
       }
     },
     /**
+      * Align carat position
+      */
+    _alignCaratPosition: function () {
+      if(this._target && (this.orientation === 'left' || this.orientation === 'right')) {
+        window.setTimeout(function() {
+          var dropDownRect = this.$.dropdown.getBoundingClientRect();
+          var targetRect = this._target.getBoundingClientRect();
+          var targetMiddleToTop = targetRect.height/2 + targetRect.top;
+          var dropDownMiddleToTop = dropDownRect.height/2 + dropDownRect.top;
+          var caratTop = 50;
+          var diffMiddle = targetMiddleToTop - dropDownMiddleToTop;
+          if (diffMiddle != 0) {
+            caratTop = Math.round(50 + diffMiddle/dropDownRect.height*100);
+          }
+          this.updateStyles({
+            '--carat-top': caratTop +'%'
+          });
+        }.bind(this),100);
+      }
+    },
+    /**
       * Displays the popover
       */
     show: function () {
@@ -263,6 +288,7 @@ Custom property | Description
       this.fire('px-popover-show', {
         target: this
       });
+      this._alignCaratPosition();
     },
     /**
       * Hides the popover

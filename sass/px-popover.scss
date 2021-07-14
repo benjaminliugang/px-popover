@@ -54,7 +54,7 @@ $carat-size: 7.5px;
 //carat on the left
 #popover.right:after, #popover.right:before {
   right: calc(100% - 1px);
-  top: 50%;
+  top: var(--carat-top);
   border: solid transparent;
   content: " ";
   height: 0;
@@ -77,7 +77,7 @@ $carat-size: 7.5px;
 //carat on the right
 #popover.left:after, #popover.left:before {
   left: calc(100% - 1px);
-  top: 50%;
+  top: var(--carat-top);
   border: solid transparent;
   content: " ";
   height: 0;
