@@ -62,6 +62,7 @@ limitations under the License.
             popover-body="{{props.popoverBody.value}}"
             orientation="{{props.orientation.value}}"
             show-overlay="{{props.showOverlay.value}}"
+            vertical-align="{{props.verticalAlign.value}}"
             scroll-action="{{props.scrollAction.value}}"
             enhanced="{{props.enhanced.value}}">
             <template is="dom-if" if="[[isCustom(chosenConfig)]]">
@@ -114,6 +115,7 @@ limitations under the License.
               popoverBody: "This is a bottom popover body",
               showOverlay: true,
               enhanced: false,
+              verticalAlign: "middle",
               lightDomContent: "",
               siblingElement: "<button class='btn btn--tertiary' id='btn1' type='button' name='button'>Click here</button>" },
 
@@ -125,6 +127,7 @@ limitations under the License.
               popoverBody: "",
               showOverlay: false,
               enhanced: true,
+              verticalAlign: "middle",
               lightDomContent: "<form><label>This is a form<input class='text-input' type='text' value='Text Input'/></label></form>",
               siblingElement: "<button class='btn btn--tertiary' id='btn1' type='button' name='button'>Click here</button>" }
           ]
@@ -136,7 +139,6 @@ limitations under the License.
      * A reference for `this.props`. Read the documentation there.
      */
     demoProps: {
-
       showOverlay: {
         type: Boolean,
         defaultValue: false,
@@ -154,6 +156,13 @@ limitations under the License.
         defaultValue: 'right',
         inputType: 'dropdown',
         inputChoices: ['left', 'right', 'top', 'bottom', 'auto']
+      },
+
+      verticalAlign: {
+        type: String,
+        defaultValue: 'middle',
+        inputType: 'dropdown',
+        inputChoices: ['top', 'middle', 'bottom']
       },
 
       scrollAction: {
