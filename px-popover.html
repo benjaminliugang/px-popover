@@ -64,6 +64,7 @@ Custom property | Description
       <style include="px-popover-styles">
         :host {
           --carat-top: 50%;
+          --carat-bottom: undefined;
         }
       </style>
 
@@ -97,7 +98,7 @@ Custom property | Description
     is: 'px-popover',
 
     observers: [
-      '_setPosition(orientation, _target)'
+      '_setPosition(orientation, _target, verticalAlign)'
     ],
 
     properties: {
@@ -181,6 +182,14 @@ Custom property | Description
         value: 'lock'
       },
       /**
+        * The orientation against which to align the dropdown content
+        * vertically relative to the dropdown trigger.
+        */
+      verticalAlign: {
+        type: String,
+        value: 'middle'
+      },
+      /**
         * Whether the popover is currently shown.
         */
       _isShowing: {
@@ -254,27 +263,6 @@ Custom property | Description
       }
     },
     /**
-      * Align carat position
-      */
-    _alignCaratPosition: function () {
-      if(this._target && (this.orientation === 'left' || this.orientation === 'right')) {
-        window.setTimeout(function() {
-          var dropDownRect = this.$.dropdown.getBoundingClientRect();
-          var targetRect = this._target.getBoundingClientRect();
-          var targetMiddleToTop = targetRect.height/2 + targetRect.top;
-          var dropDownMiddleToTop = dropDownRect.height/2 + dropDownRect.top;
-          var caratTop = 50;
-          var diffMiddle = targetMiddleToTop - dropDownMiddleToTop;
-          if (diffMiddle != 0) {
-            caratTop = Math.round(50 + diffMiddle/dropDownRect.height*100);
-          }
-          this.updateStyles({
-            '--carat-top': caratTop +'%'
-          });
-        }.bind(this),100);
-      }
-    },
-    /**
       * Displays the popover
       */
     show: function () {
@@ -288,7 +276,6 @@ Custom property | Description
       this.fire('px-popover-show', {
         target: this
       });
-      this._alignCaratPosition();
     },
     /**
       * Hides the popover
@@ -305,20 +292,43 @@ Custom property | Description
         target: this
       });
     },
-    _setPosition: function(orientation, target) {
+    _updateCaratTopBottom: function () {
+      if (this._target) {
+        var targetRect = this._target.getBoundingClientRect();
+        if (this.verticalAlign === 'top') {
+          this.updateStyles({
+            '--carat-top': Math.round( targetRect.height / 2) + 'px',
+            '--carat-bottom': undefined,
+          });
+        } else if (this.verticalAlign === 'bottom') {
+          this.updateStyles({
+            '--carat-top': undefined,
+            '--carat-bottom': Math.round( targetRect.height / 2 - 7.5) + 'px',
+          });
+        } else {
+          this.updateStyles({
+            '--carat-top': '50%',
+            '--carat-bottom': undefined,
+          });
+        }
+      }
+    },
+    _setPosition: function(orientation, target, customVerticalAlign) {
       if(orientation === undefined || target == undefined) return;
       window.setTimeout(function() {
         if(orientation === 'right') {
-          this.$.dropdown.verticalAlign = 'middle';
+          this.$.dropdown.verticalAlign = customVerticalAlign;
           this.$.dropdown.verticalOffset = 0;
           this.$.dropdown.horizontalAlign = 'left';
           this.$.dropdown.horizontalOffset = parseFloat(window.getComputedStyle(target).width) + 10;
+          this._updateCaratTopBottom();
         }
         else if(orientation === 'left') {
-          this.$.dropdown.verticalAlign = 'middle';
+          this.$.dropdown.verticalAlign = customVerticalAlign;
           this.$.dropdown.verticalOffset = 0;
           this.$.dropdown.horizontalAlign = 'right';
           this.$.dropdown.horizontalOffset = parseFloat(window.getComputedStyle(target).width) + 10;
+          this._updateCaratTopBottom();
         }
         else if(orientation === 'top') {
           this.$.dropdown.verticalAlign = 'bottom';

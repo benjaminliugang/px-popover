@@ -1,3 +1,7 @@
+v2.3.2
+==================
+* Make it support specify verticalAlign value
+
 v2.3.1
 ==================
 * Align carat's position when show with scroll bar
